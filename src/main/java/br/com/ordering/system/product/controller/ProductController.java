@@ -28,4 +28,16 @@ public class ProductController {
         return new ResponseEntity<Object>(productService.findAll(), HttpStatus.OK);
     }
 
+    @PutMapping(value = "/update")
+    public ResponseEntity<Object> updateProduct(@RequestBody ProductRequest product) {
+        ProductDTO prod = productService.findByNAME(product.getName());
+        if(prod == null){
+            productService.save(new ProductDTO(product));
+        }
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+
+
+
 }
