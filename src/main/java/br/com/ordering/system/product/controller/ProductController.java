@@ -30,7 +30,7 @@ public class ProductController {
 
     @PutMapping(value = "/update")
     public ResponseEntity<Object> updateProduct(@RequestBody ProductRequest product) {
-        ProductDTO prod = productService.findByNAME(product.getName());
+        ProductDTO prod = productService.findByProductCode(product.getProductCode());
         if(prod == null){
             productService.save(new ProductDTO(product));
         }
