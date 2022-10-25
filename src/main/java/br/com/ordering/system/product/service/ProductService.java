@@ -11,7 +11,7 @@ public interface ProductService extends MongoRepository<ProductDTO, String> {
 
 
 
-    @Query(value = "{ 'name' : ?0 }", fields = "{ 'name' : 0 }")
-    ProductDTO findByNAME(String cpf);
+    @Query(value = "{ 'productCode' : ?0 }", fields = "{ 'productCode' : 0 }")
+    ProductDTO findByCode(Integer code);
 
 }

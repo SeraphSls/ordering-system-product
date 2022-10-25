@@ -50,4 +50,16 @@ public class ProductDTO {
         this.description = request.getDescription();
         this.howToUse = request.getHowToUse();
     }
+
+    public ProductDTO(ProductRequest request, String id) {
+        this.id = id;
+        this.name = request.getName();
+        this.productCode = request.getProductCode();
+        this.inventory = request.getInventory();
+        this.content = request.getContent();
+        this.applicationVideo = request.getApplicationVideo();
+        this.price = request.getPrice();
+        this.description = request.getDescription();
+        this.howToUse = request.getHowToUse();
+    }
 }
