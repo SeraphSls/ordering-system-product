@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 public class ProductDTO {
     @MongoId(FieldType.STRING)
     private String id;
+    private Integer productCode;
     private String name;
     private Integer inventory;
     private String content;
@@ -22,8 +23,10 @@ public class ProductDTO {
     private String description;
     private String howToUse;
 
-    public ProductDTO(String id, String name, Integer inventory, String content, String applicationVideo, BigDecimal price, String description, String howToUse) {
+
+    public ProductDTO(String id, Integer productId, String name, Integer inventory, String content, String applicationVideo, BigDecimal price, String description, String howToUse) {
         this.id = id;
+        this.productCode = productId;
         this.name = name;
         this.inventory = inventory;
         this.content = content;
@@ -39,6 +42,19 @@ public class ProductDTO {
 
     public ProductDTO(ProductRequest request) {
         this.name = request.getName();
+        this.productCode = request.getProductCode();
+        this.inventory = request.getInventory();
+        this.content = request.getContent();
+        this.applicationVideo = request.getApplicationVideo();
+        this.price = request.getPrice();
+        this.description = request.getDescription();
+        this.howToUse = request.getHowToUse();
+    }
+
+    public ProductDTO(ProductRequest request, String id) {
+        this.id = id;
+        this.name = request.getName();
+        this.productCode = request.getProductCode();
         this.inventory = request.getInventory();
         this.content = request.getContent();
         this.applicationVideo = request.getApplicationVideo();

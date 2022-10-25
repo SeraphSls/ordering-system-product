@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-@EnableMongoRepositories(basePackages = "br.com.ordering.system.product")
+@EnableMongoRepositories(basePackages = "br.com.ordering.system")
 @Configuration
 public class MongoConfig {
 
