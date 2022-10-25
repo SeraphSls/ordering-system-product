@@ -1,6 +1,5 @@
 package br.com.ordering.system.product.controller;
 
-
 import br.com.ordering.system.product.domain.ProductDTO;
 import br.com.ordering.system.product.request.ProductRequest;
 import br.com.ordering.system.product.service.ProductService;
@@ -15,12 +14,16 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-
     @PostMapping(value = "/insert")
     public ResponseEntity<Object> insertProduct(@RequestBody ProductRequest product) {
         ProductDTO productDTO = new ProductDTO(product);
-        productService.insert(productDTO);
-        return new ResponseEntity<Object>(HttpStatus.CREATED);
+        ProductDTO prod = productService.findByCode(product.getProductCode());
+        if(prod != null){
+            return new ResponseEntity<>("Codigo de produto ja existente!", HttpStatus.BAD_REQUEST);
+        }else {
+            productService.insert(productDTO);
+            return new ResponseEntity<Object>(HttpStatus.CREATED);
+        }
     }
 
     @GetMapping(value = "/recover")
@@ -39,7 +42,15 @@ public class ProductController {
         }
     }
 
-
-
+    @PostMapping(value = "/delete")
+    public ResponseEntity<Object> deleteProduct(@RequestBody ProductRequest product) {
+        ProductDTO prod = productService.findByCode(product.getProductCode());
+        if(prod == null){
+            return new ResponseEntity<>("Produto nao encontrado!", HttpStatus.BAD_REQUEST);
+        }else {
+            productService.delete(new ProductDTO(product, prod.getId()));
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+    }
 
 }
